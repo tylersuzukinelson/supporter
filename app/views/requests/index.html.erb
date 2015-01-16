@@ -1,0 +1,38 @@
+<%= "<em>#{flash[:notice]}</em><br /><br />".html_safe if flash[:notice] %>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>Message</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+<% @requests.each do |request| %>
+  <tr>
+    <td><%= request.name %></td>
+    <td><%= mail_to request.email %></td>
+    <td><%= request.department %></td>
+    <td><%= request.message %></td>
+    <td>
+      <%= link_to "Edit", edit_request_path(request), class: "btn btn-default" %>
+      <%= link_to "Delete", request_path(request), method: :delete, data: {confirm: "Are you sure? This is permanent and cannot be undone."}, class: "btn btn-default" %>
+      <% if request.done %>
+        <%= form_for(request, :html => {style: "display: inline-block"}) do |f| %>
+        <input type="hidden" name="request[done]" value="false" />
+        <%= f.submit "Mark as Not Done", class: "btn btn-default" %>
+        <% end %>
+      <% else %>
+        <%= form_for(request, :html => {style: "display: inline-block"}) do |f| %>
+        <input type="hidden" name="request[done]" value="true" />
+        <%= f.submit "Mark as Done", class: "btn btn-default" %>
+        <% end %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @requests %>

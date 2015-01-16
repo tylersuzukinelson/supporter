@@ -1,0 +1,32 @@
+<%= "<em>#{flash[:notice]}</em><br /><br />".html_safe if flash[:notice] %>
+
+<%= form_for @request do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <br />
+
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+
+  <br />
+
+  Department
+  <%= label_tag :department_sales, "Sales" %>
+  <%= radio_button_tag :department, "sales", checked: true %>
+  <%= label_tag :department_marketing, "Marketing" %>
+  <%= radio_button_tag :department, "marketing" %>
+  <%= label_tag :department_technical, "Technical" %>
+  <%= radio_button_tag :department, "technical" %>
+
+  <br />
+
+  <%= f.label :message %>
+  <%= f.text_area :message %>
+
+  <br />
+
+  <%= f.submit "Save" %>
+
+<% end %>
