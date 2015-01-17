@@ -1,32 +1,46 @@
 <%= "<em>#{flash[:notice]}</em><br /><br />".html_safe if flash[:notice] %>
 
-<%= form_for @request do |f| %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <br />
-
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <br />
-
-  Department
-  <%= label_tag :department_sales, "Sales" %>
-  <%= radio_button_tag :department, "sales", checked: true %>
-  <%= label_tag :department_marketing, "Marketing" %>
-  <%= radio_button_tag :department, "marketing" %>
-  <%= label_tag :department_technical, "Technical" %>
-  <%= radio_button_tag :department, "technical" %>
-
-  <br />
-
-  <%= f.label :message %>
-  <%= f.text_area :message %>
-
-  <br />
-
-  <%= f.submit "Save" %>
-
+<%= form_for @request, html: {class: "form-horizontal"} do |f| %>
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, class: "col-sm-2 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_field :email, class: "form-control" %>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2 control-label"><label>Department</label> </div>
+    <div class="col-sm-3">
+      <%= label_tag :department_sales, "Sales &nbsp;&nbsp;".html_safe %>
+      <%= radio_button_tag :department, "sales", checked: true, class: "form-control" %>
+    </div>
+    <div class="col-sm-3">
+      <%= label_tag :department_marketing, "Marketing &nbsp;&nbsp;".html_safe %>
+      <%= radio_button_tag :department, "marketing", class: "form-control" %>
+    </div>
+    <div class="col-sm-4">
+      <%= label_tag :department_technical, "Technical &nbsp;&nbsp;".html_safe %>
+      <%= radio_button_tag :department, "technical", class: "form-control" %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :message, class: "col-sm-2 control-label" %>
+    <div class="col-sm-9">
+      <%= f.text_area :message, class: "form-control" %>
+    </div>
+    <div class="col-sm-1"></div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-10">
+      <%= f.submit "Save", class: "btn btn-default" %>
+    </div>
+  </div>
 <% end %>
